@@ -40,7 +40,7 @@ public partial class add_new_borrower: System.Web.UI.Page
             SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=Library;Integrated Security=True");
             SqlCommand command = new SqlCommand();
             command.Connection = conn;
-            command.CommandText = String.Format("insert into Books values ('{0}','{1}','{2}','{3}')", isbn, name, imagename, edition);
+            command.CommandText = String.Format("insert into Books values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')", BID, Fname, Mindname, Lname,Phone_numb,Dept,Email,Address);
             conn.Open();
 
             int n = command.ExecuteNonQuery();
