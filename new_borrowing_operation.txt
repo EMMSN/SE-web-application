@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+
+public partial class new_borrowing_operation : System.Web.UI.Page
+{
+
+    int id;
+    int Book_id;
+    int Borrower_id;
+    string Borrowing_data;
+    string Expected_return_date;
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (IsPostBack)
+        {
+            TextBox1.Text = "";
+            TextBox2.Text = "";
+            TextBox3.Text = "";
+            TextBox4.Text = "";
+            TextBox5.Text = "";
+
+        }
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        id = int.Parse(TextBox1.Text) ;
+        Book_id = int.Parse(TextBox2.Text);
+        Borrower_id = int.Parse(TextBox3.Text);
+        Borrowing_data = TextBox4.Text;
+        Expected_return_date = TextBox5.Text;
+
+        SqlConnection co = new SqlConnection("Data Source=.;Initial Catalog=library;Integrated Security=True");
+        SqlCommand command = new SqlCommand();
+        command.Connection = co;
+        command.CommandText = string.Format("insert into Borrowing_table Values('{0}','{1}','{2}','{3}','{4}') ", Book_id, Borrower_id, Borrowing_data, Expected_return_date, id);
+
+
+        co.Open();
+
+        command.ExecuteNonQuery();
+
+        co.Close();
+    }
+}

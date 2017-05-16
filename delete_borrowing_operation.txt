@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+
+public partial class delete_borrowing_operation : System.Web.UI.Page
+{
+
+
+    int id;
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            TextBox1.Text = "";
+            
+        }
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        id = int.Parse(TextBox1.Text);
+
+        SqlConnection co = new SqlConnection("Data Source=.;Initial Catalog=library;Integrated Security=True");
+        SqlCommand command = new SqlCommand();
+        command.Connection = co;
+        command.CommandText = string.Format("delete from Borrowing_table where id ='" + TextBox1.Text+"'",co);
+
+
+        co.Open();
+
+        command.ExecuteNonQuery();
+
+        co.Close();
+    }
+}
