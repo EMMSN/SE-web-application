@@ -9,7 +9,8 @@ public partial class add_new_book : System.Web.UI.Page
 {
     string BookName;
     string BookAuthor;
-    string BookCategory;
+    string BookStat;
+    string Category;
     int BookID;
     int BookYear;
     
@@ -18,7 +19,7 @@ public partial class add_new_book : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            TextBox1.Text = TextBox2.Text = TextBox3.Text = "";
+             TextBox2.Text = TextBox3.Text = "";
         }
     }
 
@@ -28,16 +29,16 @@ public partial class add_new_book : System.Web.UI.Page
         {
            BookName= TextBox1.Text ;
            BookAuthor= TextBox2.Text;
-           BookCategory = TextBox3.Text;
+           BookStat = TextBox3.Text;
            BookID = int.Parse(TextBox4.Text);
            BookYear = int.Parse(TextBox5.Text);
+           BookCategory = TextBox6.Text;
 
 
-        //Will be updated depending on the Sql Queries of our own.. I guess
         SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=Library;Integrated Security=True");
         SqlCommand command = new SqlCommand();
         command.Connection = conn;
-        command.CommandText = String.Format("insert into Books values ('{0}','{1}','{2}','{3}')",isbn,name,imagename,edition);
+        command.CommandText = String.Format("insert into Books values ('{0}','{1}','{2}','{3}','{4}','{5}')",BookID,BookName,BookAuthor,BookYear,BookCategory);
         conn.Open();
 
        int n =  command.ExecuteNonQuery();
