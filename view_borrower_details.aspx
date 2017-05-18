@@ -16,8 +16,8 @@
     font-size: 16px;
     font-family: tahoma;
     margin-left: 788px;
-    background: none;
     color: white;
+    background-color:#9f4736;
     border: 1px solid white;
     border-radius: 8px;
     width: 70px;
@@ -36,16 +36,17 @@
             width: 393px;
         }
         .auto-style4 {
-            left: 10px;
+            left: -61px;
             top: 15px;
-            width: 408px;
+            width: 740px;
+            position: absolute;
         }
         </style>
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
-        <asp:TextBox ID="txtborrower" runat="server" CssClass="auto-style3" placeholder="    Borrower Id"
+        <asp:TextBox ID="TextBox1" runat="server" CssClass="auto-style3" placeholder="    Borrower Id"
             style="position: absolute;
              width: 300px;
              height: 30px;
@@ -55,24 +56,19 @@
                margin-top: 59px;
               font-size: 18px;
             "></asp:TextBox>
-        <asp:Button ID="Button" runat="server" Text="Search" class="search" />
-        <asp:GridView ID="GridView1" runat="server" BackColor="#DEBA84" 
-            BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" 
-            CellSpacing="2" CssClass="auto-style4" AutoGenerateColumns="False" 
-            DataSourceID="dsborrower">
+        <asp:Button ID="Button1" runat="server" Text="Search" class="search" />
+        <asp:GridView ID="GridView1" runat="server" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" CellSpacing="2" CssClass="auto-style4" AutoGenerateColumns="False" DataKeyNames="Borrower_id" DataSourceID="VBD"
+            style =" margin-left:325px;
+                     margin-top:136px;">
             <Columns>
-                <asp:BoundField DataField="Borrower_id" HeaderText="Borrower_id" 
-                    SortExpression="Borrower_id" />
-                <asp:BoundField DataField="fname" HeaderText="fname" SortExpression="fname" />
-                <asp:BoundField DataField="mname" HeaderText="mname" SortExpression="mname" />
-                <asp:BoundField DataField="lname" HeaderText="lname" SortExpression="lname" />
-                <asp:BoundField DataField="phone_number" HeaderText="phone_number" 
-                    SortExpression="phone_number" />
-                <asp:BoundField DataField="department" HeaderText="department" 
-                    SortExpression="department" />
-                <asp:BoundField DataField="email" HeaderText="email" SortExpression="email" />
-                <asp:BoundField DataField="addresse" HeaderText="addresse" 
-                    SortExpression="addresse" />
+                <asp:BoundField DataField="Borrower_id" HeaderText="Borrower_id" InsertVisible="False" ReadOnly="True" SortExpression="Borrower_id" />
+                <asp:BoundField DataField="First_name" HeaderText="First_name" SortExpression="First_name" />
+                <asp:BoundField DataField="Middle_name" HeaderText="Middle_name" SortExpression="Middle_name" />
+                <asp:BoundField DataField="Last_name" HeaderText="Last_name" SortExpression="Last_name" />
+                <asp:BoundField DataField="Phone_num" HeaderText="Phone_num" SortExpression="Phone_num" />
+                <asp:BoundField DataField="Department" HeaderText="Department" SortExpression="Department" />
+                <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
+                <asp:BoundField DataField="Address" HeaderText="Address" SortExpression="Address" />
             </Columns>
             <FooterStyle BackColor="#F7DFB5" ForeColor="#8C4510" />
             <HeaderStyle BackColor="#A55129" Font-Bold="True" ForeColor="White" />
@@ -84,12 +80,9 @@
             <SortedDescendingCellStyle BackColor="#F1E5CE" />
             <SortedDescendingHeaderStyle BackColor="#93451F" />
         </asp:GridView>
-        <asp:SqlDataSource ID="dsborrower" runat="server" 
-            ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-            SelectCommand="select * from borrower where Borrower_id = @p">
+        <asp:SqlDataSource ID="VBD" runat="server" ConnectionString="<%$ ConnectionStrings:libraryConnectionString %>" SelectCommand="SELECT * FROM [Borrower_table] where Borrower_id = @D">
             <SelectParameters>
-                <asp:ControlParameter ControlID="txtborrower" DefaultValue="-1" Name="p" 
-                    PropertyName="Text" />
+                <asp:ControlParameter ControlID="TextBox1" DefaultValue="-1" Name="D" PropertyName="Text" />
             </SelectParameters>
         </asp:SqlDataSource>
      <asp:Image ID="Image1" runat="server" Height="660px" ImageUrl="2.jpg" Width="1365px" CssClass="auto-style2" />

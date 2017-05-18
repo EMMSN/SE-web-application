@@ -17,8 +17,8 @@
             font-size: 16px;
              font-family: tahoma;
             margin-left: 614px;
-             background: none;
-             color: white;
+             background: white;
+             color: black;
              border: 1px solid white;
              border-radius: 8px;
              width: 116px;
@@ -26,7 +26,7 @@
         }
           #GridView1{
             position:absolute;
-            margin-left:520px;
+            margin-left:405px;
             margin-top:180px;
         }
         .auto-style3 {
@@ -39,23 +39,19 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <asp:DropDownList ID="DropDownList1" runat="server">
+        <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True">
+            <asp:ListItem>2015</asp:ListItem>
+            <asp:ListItem>2016</asp:ListItem>
+            <asp:ListItem>2017</asp:ListItem>
         </asp:DropDownList>
-        <asp:GridView ID="GridView1" runat="server" BackColor="#DEBA84" 
-            BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" 
-            CellSpacing="2" CssClass="auto-style3" AutoGenerateColumns="False" 
-            DataSourceID="dsbook7">
+        <asp:GridView ID="GridView1" runat="server" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" CellSpacing="2" CssClass="auto-style3" AutoGenerateColumns="False" DataKeyNames="Book_id" DataSourceID="VRB">
             <Columns>
-                <asp:BoundField DataField="Book_id" HeaderText="Book_id" 
-                    SortExpression="Book_id" />
-                <asp:BoundField DataField="Book_name" HeaderText="Book_name" 
-                    SortExpression="Book_name" />
-                <asp:BoundField DataField="Author_name" HeaderText="Author_name" 
-                    SortExpression="Author_name" />
-                <asp:BoundField DataField="Year_published" HeaderText="Year_published" 
-                    SortExpression="Year_published" />
-                <asp:BoundField DataField="status" HeaderText="status" 
-                    SortExpression="status" />
+                <asp:BoundField DataField="Book_id" HeaderText="Book_id" InsertVisible="False" ReadOnly="True" SortExpression="Book_id" />
+                <asp:BoundField DataField="Book_name" HeaderText="Book_name" SortExpression="Book_name" />
+                <asp:BoundField DataField="Author_name" HeaderText="Author_name" SortExpression="Author_name" />
+                <asp:BoundField DataField="Year_published" HeaderText="Year_published" SortExpression="Year_published" />
+                <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
+                <asp:BoundField DataField="Category" HeaderText="Category" SortExpression="Category" />
             </Columns>
             <FooterStyle BackColor="#F7DFB5" ForeColor="#8C4510" />
             <HeaderStyle BackColor="#A55129" Font-Bold="True" ForeColor="White" />
@@ -67,9 +63,10 @@
             <SortedDescendingCellStyle BackColor="#F1E5CE" />
             <SortedDescendingHeaderStyle BackColor="#93451F" />
         </asp:GridView>
-        <asp:SqlDataSource ID="dsbook7" runat="server" 
-            ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-            SelectCommand="select * from Book_table where status ='avaliable'">
+        <asp:SqlDataSource ID="VRB" runat="server" ConnectionString="<%$ ConnectionStrings:libraryConnectionString %>" SelectCommand="SELECT * FROM [Book1_table] where Year_published = @YB">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="DropDownList1" DefaultValue="-1" Name="YB" PropertyName="SelectedValue" />
+            </SelectParameters>
         </asp:SqlDataSource>
     <asp:Image ID="Image1" runat="server" Height="660px" ImageUrl="~/2.jpg" Width="1365px" CssClass="auto-style2" />
     </div>
